@@ -8,7 +8,8 @@
 	"scripts": {
 		"dev": "tsx watch src/server.ts",
 		"start": "node build/server.js",
-		"build": "tsup src --out-dir build"
+		"build": "tsup src --out-dir build",
+		"lint": "biome lint --fix --unsafe && biome format --fix"
 	},
 	"author": "Thiago Brito<https://github.com/trybrito>",
 	"license": "MIT",
