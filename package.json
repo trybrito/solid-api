@@ -9,7 +9,9 @@
 		"dev": "tsx watch src/server.ts",
 		"start": "node build/server.js",
 		"build": "tsup src --out-dir build",
-		"lint": "biome lint --fix --unsafe && biome format --fix"
+		"lint": "biome lint --fix --unsafe && biome format --fix",
+		"test:watch": "vitest",
+		"test": "vitest run"
 	},
 	"author": "Thiago Brito<https://github.com/trybrito>",
 	"license": "MIT",
@@ -20,7 +22,9 @@
 		"prisma": "6.5.0",
 		"tsup": "8.4.0",
 		"tsx": "4.19.3",
-		"typescript": "5.8.2"
+		"typescript": "5.8.2",
+		"vite-tsconfig-paths": "5.1.4",
+		"vitest": "3.0.9"
 	},
 	"dependencies": {
 		"@prisma/client": "6.5.0",
