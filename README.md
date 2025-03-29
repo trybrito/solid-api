@@ -4,7 +4,7 @@ API for a Gympass-like app.
 
 ## RFs - Requisitos Funcionais
 
-- [] Deve ser possível se cadastrar;
+- [x] Deve ser possível se cadastrar;
 - [] Deve ser possível se autenticar;
 - [] Deve ser possível obter o perfil de um usuário logado;
 - [] Deve ser possível obter o número de check-ins realizados pelo usuário logado;
@@ -17,7 +17,7 @@ API for a Gympass-like app.
 
 ## RN - Regras de Negócio
 
-- [] O usuário não deve poder se cadastrar com um e-mail duplicado;
+- [x] O usuário não deve poder se cadastrar com um e-mail duplicado;
 - [] O usuário não pode fazer 2 check-ins no dia;
 - [] O usuário não pode fazer check-in se não estiver perto (100m) da academia;
 - [] O check-in só pode ser validado 20 minutos após criado;
@@ -26,7 +26,7 @@ API for a Gympass-like app.
 
 ## RNFs - Requisitos Não-funcionais
 
-- [] A senha do usuário deve estar criptografada;
+- [x] A senha do usuário deve estar criptografada;
 - [] Os dados da aplicação precisam estar persistidos em um banco de dados Postgres;
 - [] Todas as listas de dados precisam estar paginadas com 20 itens por página;
 - [] O usuário deve ser identificado por um JSON Web Token;
