@@ -19,8 +19,8 @@ describe('Check-in Service', () => {
 			title: 'Test Gym',
 			description: '',
 			phone: '',
-			latitude: new Decimal(0),
-			longitude: new Decimal(0),
+			latitude: new Decimal(-22.8076349),
+			longitude: new Decimal(-47.2158256),
 		})
 
 		vi.useFakeTimers()
@@ -34,8 +34,8 @@ describe('Check-in Service', () => {
 		const { checkIn } = await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
-			userLatitude: 0,
-			userLongitude: 0,
+			userLatitude: -22.8076349,
+			userLongitude: -47.2158256,
 		})
 
 		expect(checkIn.id).toEqual(expect.any(String))
@@ -53,16 +53,16 @@ describe('Check-in Service', () => {
 		await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
-			userLatitude: 0,
-			userLongitude: 0,
+			userLatitude: -22.8076349,
+			userLongitude: -47.2158256,
 		})
 
 		await expect(() =>
 			sut.execute({
 				gymId: 'gym-01',
 				userId: 'user-01',
-				userLatitude: 0,
-				userLongitude: 0,
+				userLatitude: -22.8076349,
+				userLongitude: -47.2158256,
 			}),
 		).rejects.toBeInstanceOf(Error)
 	})
@@ -73,8 +73,8 @@ describe('Check-in Service', () => {
 		await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
-			userLatitude: 0,
-			userLongitude: 0,
+			userLatitude: -22.8076349,
+			userLongitude: -47.2158256,
 		})
 
 		vi.setSystemTime(new Date(2025, 2, 30, 20, 0, 0))
@@ -82,10 +82,30 @@ describe('Check-in Service', () => {
 		const { checkIn } = await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
-			userLatitude: 0,
-			userLongitude: 0,
+			userLatitude: -22.8076349,
+			userLongitude: -47.2158256,
 		})
 
 		expect(checkIn.id).toEqual(expect.any(String))
+	})
+
+	it('should not be able to check-in on a distant gym', async () => {
+		gymsRepository.database.push({
+			id: 'gym-02',
+			title: 'Test Gym',
+			description: '',
+			phone: '',
+			latitude: new Decimal(-22.8374597),
+			longitude: new Decimal(-47.1625247),
+		})
+
+		await expect(() =>
+			sut.execute({
+				gymId: 'gym-02',
+				userId: 'user-01',
+				userLatitude: -22.8076349,
+				userLongitude: -47.2158256,
+			}),
+		).rejects.toBeInstanceOf(Error)
 	})
 })

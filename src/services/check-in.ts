@@ -2,6 +2,7 @@ import type { CheckInsRepository } from '@/repositories/check-ins-repository'
 import type { GymsRepository } from '@/repositories/gyms-repository'
 import type { CheckIn } from '@prisma/client'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinates'
 
 interface CheckInServiceRequest {
 	userId: string
@@ -36,6 +37,23 @@ export class CheckInService {
 			userId,
 			new Date(),
 		)
+
+		const distanceInKilometers = getDistanceBetweenCoordinates(
+			{
+				latitude: userLatitude,
+				longitude: userLongitude,
+			},
+			{
+				latitude: Number(gym.latitude),
+				longitude: Number(gym.longitude),
+			},
+		)
+
+		const MAXIMUM_ALLOWED_DISTANCE_IN_METERS = 0.1
+
+		if (distanceInKilometers > MAXIMUM_ALLOWED_DISTANCE_IN_METERS) {
+			throw new Error()
+		}
 
 		if (checkInOnSameDate) {
 			throw new Error()
