@@ -12,7 +12,7 @@ type AuthenticateServiceResponse = {
 	user: User
 }
 
-export class Authenticate {
+export class AuthenticateService {
 	constructor(private usersRepository: UsersRepository) {}
 
 	async execute({
@@ -25,7 +25,7 @@ export class Authenticate {
 			throw new InvalidCredentialsError()
 		}
 
-		const doesPasswordMatches = compare(password, user.password_hash)
+		const doesPasswordMatches = await compare(password, user.password_hash)
 
 		if (!doesPasswordMatches) {
 			throw new InvalidCredentialsError()
