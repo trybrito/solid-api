@@ -1,14 +1,27 @@
 import { describe, it, beforeEach, expect, vi, afterAll } from 'vitest'
 import { CheckInService } from './check-in'
 import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
+import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
+import { Decimal } from '@prisma/client/runtime/library'
 
 let usersRepository: InMemoryCheckInsRepository
+let gymsRepository: InMemoryGymsRepository
 let sut: CheckInService
 
 describe('Check-in Service', () => {
 	beforeEach(() => {
 		usersRepository = new InMemoryCheckInsRepository()
-		sut = new CheckInService(usersRepository)
+		gymsRepository = new InMemoryGymsRepository()
+		sut = new CheckInService(usersRepository, gymsRepository)
+
+		gymsRepository.database.push({
+			id: 'gym-01',
+			title: 'Test Gym',
+			description: '',
+			phone: '',
+			latitude: new Decimal(0),
+			longitude: new Decimal(0),
+		})
 
 		vi.useFakeTimers()
 	})
@@ -21,6 +34,8 @@ describe('Check-in Service', () => {
 		const { checkIn } = await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
+			userLatitude: 0,
+			userLongitude: 0,
 		})
 
 		expect(checkIn.id).toEqual(expect.any(String))
@@ -38,12 +53,16 @@ describe('Check-in Service', () => {
 		await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
+			userLatitude: 0,
+			userLongitude: 0,
 		})
 
 		await expect(() =>
 			sut.execute({
 				gymId: 'gym-01',
 				userId: 'user-01',
+				userLatitude: 0,
+				userLongitude: 0,
 			}),
 		).rejects.toBeInstanceOf(Error)
 	})
@@ -54,6 +73,8 @@ describe('Check-in Service', () => {
 		await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
+			userLatitude: 0,
+			userLongitude: 0,
 		})
 
 		vi.setSystemTime(new Date(2025, 2, 30, 20, 0, 0))
@@ -61,6 +82,8 @@ describe('Check-in Service', () => {
 		const { checkIn } = await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
+			userLatitude: 0,
+			userLongitude: 0,
 		})
 
 		expect(checkIn.id).toEqual(expect.any(String))
