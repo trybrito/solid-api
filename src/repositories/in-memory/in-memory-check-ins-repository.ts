@@ -25,6 +25,10 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
 		return checkInOnSameDate
 	}
 
+	async findManyById(userId: string): Promise<CheckIn[]> {
+		return this.database.filter((checkIn) => checkIn.user_id === userId)
+	}
+
 	async create(data: Prisma.CheckInUncheckedCreateInput) {
 		const checkIn = {
 			id: randomUUID(),
