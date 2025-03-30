@@ -5,13 +5,13 @@ import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-
 let gymsRepository: InMemoryGymsRepository
 let sut: CreateGymService
 
-describe('Register Service', () => {
+describe('Create Gym Service', () => {
 	beforeEach(() => {
 		gymsRepository = new InMemoryGymsRepository()
 		sut = new CreateGymService(gymsRepository)
 	})
 
-	it('should be able to register', async () => {
+	it('should be able to create gym', async () => {
 		const { gym } = await sut.execute({
 			title: 'Test Gym',
 			description: null,
