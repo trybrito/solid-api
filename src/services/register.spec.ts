@@ -5,7 +5,7 @@ import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-user
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 
 describe('Register service', () => {
-	it('should should be able to register', async () => {
+	it('should be able to register', async () => {
 		const usersRepository = new InMemoryUsersRepository()
 		const registerService = new RegisterService(usersRepository)
 
