@@ -5,7 +5,7 @@ API for a Gympass-like app.
 ## RFs - Requisitos Funcionais
 
 - [x] Deve ser possível se cadastrar;
-- [] Deve ser possível se autenticar;
+- [x] Deve ser possível se autenticar;
 - [] Deve ser possível obter o perfil de um usuário logado;
 - [] Deve ser possível obter o número de check-ins realizados pelo usuário logado;
 - [] Deve ser possível o usuário acessar seu histórico de check-ins;
@@ -27,6 +27,6 @@ API for a Gympass-like app.
 ## RNFs - Requisitos Não-funcionais
 
 - [x] A senha do usuário deve estar criptografada;
-- [] Os dados da aplicação precisam estar persistidos em um banco de dados Postgres;
+- [x] Os dados da aplicação precisam estar persistidos em um banco de dados Postgres;
 - [] Todas as listas de dados precisam estar paginadas com 20 itens por página;
 - [] O usuário deve ser identificado por um JSON Web Token;
