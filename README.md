@@ -29,4 +29,4 @@ API for a Gympass-like app.
 - [x] A senha do usuário deve estar criptografada;
 - [x] Os dados da aplicação precisam estar persistidos em um banco de dados Postgres;
 - [x] Todas as listas de dados precisam estar paginadas com 20 itens por página;
-- [] O usuário deve ser identificado por um JSON Web Token;
+- [x] O usuário deve ser identificado por um JSON Web Token;
