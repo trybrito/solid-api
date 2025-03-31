@@ -3,7 +3,7 @@ import { createAndAuthenticateUser } from '@/utils/tests/create-and-authenticate
 import request from 'supertest'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-describe('Profile Controller (e2e)', () => {
+describe('Get User Profile Controller (e2e)', () => {
 	beforeAll(async () => {
 		await app.ready()
 	})
