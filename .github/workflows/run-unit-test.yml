@@ -4,16 +4,27 @@ on: [push]
 
 jobs:
   run-unit-tests:
-    name: Run Unit Tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 18
+          version: 10
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
       
-      - run: pnpm ci
+      - name: Install dependencies
+        run: pnpm ci
 
-      - run: pnpm run test
+      - name: Run Unit Tests
+        run: pnpm run test
