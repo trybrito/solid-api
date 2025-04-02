@@ -5,6 +5,9 @@
 	"engines": {
 		"node": ">=18"
 	},
+	"pnpm": {
+		"neverBuiltDependencies": []
+	},
 	"scripts": {
 		"dev": "tsx watch src/server.ts",
 		"start": "node build/server.js",
